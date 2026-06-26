@@ -10,9 +10,13 @@
         :root {
             --neon-cyan: #00f3ff; 
             --neon-pink: #ff007f;
-            --gold-primary: #d97706;
+            --gold-light: #fef08a;
+            --gold-primary: #f59e0b;
+            --gold-dark: #b45309;
+            --luxury-gold: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
             --text-dark: #0f172a;
-            --text-muted: #334155;
+            --text-muted: #475569;
+            --bg-glass: rgba(255, 255, 255, 0.93);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,8 +25,25 @@
             width: 100%; height: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            background: linear-gradient(135deg, #020202, #0a0a0a, #050510);
+            background: radial-gradient(circle at center, #0c152b 0%, #050711 100%);
             display: flex; justify-content: center; align-items: center;
+        }
+
+        /* Latar belakang dekoratif awan/partikel halus */
+        .bg-decorations {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 0; pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-emoji {
+            position: absolute; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            opacity: 0.15; animation: floatAround 8s infinite ease-in-out;
+        }
+        @keyframes floatAround {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         canvas {
@@ -31,178 +52,212 @@
             z-index: 1; pointer-events: none;
         }
 
-        /* Padding responsif: Akan besar di PC dan otomatis mengecil di HP */
+        /* Desain Kartu Mewah, Elegan & Profesional */
         .glass-card {
             position: relative; z-index: 2;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(0, 243, 255, 0.8);
-            border-radius: clamp(20px, 4vw, 32px);
-            padding: clamp(25px, 5vw, 45px) clamp(20px, 5vw, 55px);
-            max-width: 850px; width: 92%; max-height: 90vh;
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: clamp(24px, 5vw, 36px);
+            padding: clamp(30px, 6vw, 50px) clamp(20px, 5vw, 60px);
+            max-width: 750px; width: 92%; max-height: 92vh;
             overflow-y: auto; text-align: center;
             box-shadow: 
-                0 0 40px rgba(0, 243, 255, 0.5), 
-                inset 0 0 20px rgba(16, 185, 129, 0.15),
-                0 20px 50px rgba(217, 119, 6, 0.2);
-            transition: all 0.5s ease;
+                0 0 50px rgba(0, 243, 255, 0.25), 
+                inset 0 0 30px rgba(245, 158, 11, 0.1),
+                0 30px 70px rgba(5, 7, 17, 0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .glass-card::-webkit-scrollbar { width: 0px; }
+        .glass-card::-webkit-scrollbar { width: 4px; }
+        .glass-card::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
 
         .header-group {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            margin-bottom: 10px; width: 100%;
+            margin-bottom: 15px; width: 100%;
         }
 
         .logo-container { 
             display: flex; justify-content: center; align-items: center;
             padding: 5px 20px; margin-bottom: 15px;
+            animation: pulseLogo 3s infinite ease-in-out;
+        }
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 8px 25px rgba(0, 243, 255, 0.3)); }
         }
         
         .logo-container img { 
-            max-width: clamp(160px, 30vw, 240px); width: 100%; height: auto; display: block;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+            max-width: clamp(170px, 35vw, 250px); width: 100%; height: auto; display: block;
         }
 
         .subtitle {
-            color: #b45309; font-weight: 800;
-            font-size: clamp(0.75rem, 2vw, 0.95rem);
-            letter-spacing: clamp(2px, 0.5vw, 4px); text-transform: uppercase;
-            display: inline-block; background: rgba(217, 119, 6, 0.1);
-            padding: 6px 30px; border-radius: 50px; border-bottom: 3px solid var(--gold-primary);
+            color: var(--gold-dark); font-weight: 800;
+            font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+            letter-spacing: 3px; text-transform: uppercase;
+            display: inline-block; background: rgba(245, 158, 11, 0.12);
+            padding: 6px 28px; border-radius: 50px; border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: inset 0 1px 4px rgba(245, 158, 11, 0.1);
         }
 
-        /* Ukuran font fluid (mengalir) mengikuti lebar layar */
         h1 {
             font-family: 'Outfit', sans-serif; font-weight: 900;
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            line-height: 1.2; color: var(--text-dark); margin-bottom: 5px; margin-top: 15px;
-            text-shadow: 0 2px 10px rgba(0, 243, 255, 0.3);
+            font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+            line-height: 1.1; margin-bottom: 5px; margin-top: 15px;
+            background: linear-gradient(135deg, #0f172a 30%, #1e293b 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        /* Transisi Umur Angka */
         .number-transition {
             position: relative; 
-            height: clamp(80px, 15vw, 140px);
+            height: clamp(90px, 16vw, 130px);
             display: flex; justify-content: center; align-items: center;
-            margin: 10px 0 20px 0; font-family: 'Titan One', cursive; 
-            font-size: clamp(4.5rem, 12vw, 7.5rem); 
+            margin: 15px 0; font-family: 'Titan One', cursive; 
+            font-size: clamp(5rem, 13vw, 8rem); 
         }
         
-        .num-wrapper { position: relative; width: clamp(100px, 20vw, 160px); height: 100%; }
+        .num-wrapper { position: relative; width: clamp(110px, 22vw, 170px); height: 100%; }
         
         .num {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(180deg, #FDE047 0%, #F59E0B 50%, #B45309 100%);
+            background: var(--luxury-gold);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 2px #fff; 
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 8px 12px rgba(180, 83, 9, 0.4));
         }
         
         .num.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .num.out { animation: pullDown 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+        .num.out { animation: pullDown 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
         @keyframes pullDown {
             0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            100% { transform: translate(-50%, 50%) scale(0.5) rotate(15deg); opacity: 0; }
+            100% { transform: translate(-50%, 60%) scale(0.4); opacity: 0; }
         }
         
-        .num.standby { transform: translate(-50%, 150%) scale(0.5); opacity: 0; }
-        .num.in { animation: superBounce 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards; }
+        .num.standby { transform: translate(-50%, 150%) scale(0.4); opacity: 0; }
+        .num.in { animation: superBounce 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes superBounce {
-            0% { opacity: 0; transform: translate(-50%, 100%) scale(0.5); }
-            40% { opacity: 1; transform: translate(-50%, -80%) scale(1.2) rotate(-10deg); filter: brightness(1.3); }
-            60% { transform: translate(-50%, -30%) scale(0.9) rotate(8deg); }
-            80% { transform: translate(-50%, -60%) scale(1.05) rotate(-5deg); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: brightness(1); }
+            0% { opacity: 0; transform: translate(-50%, 100%) scale(0.4); }
+            40% { opacity: 1; transform: translate(-50%, -75%) scale(1.15) rotate(-8deg); }
+            70% { transform: translate(-50%, -45%) scale(0.95) rotate(5deg); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
         }
 
         .tahun-text { 
-            color: var(--text-dark); margin-left: clamp(5px, 2vw, 15px); 
+            color: #1e293b; margin-left: 10px; 
             font-family: 'Outfit', sans-serif; font-weight: 900; 
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            letter-spacing: clamp(1px, 0.5vw, 3px); 
-            transform: translateY(clamp(5px, 2vw, 15px));
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            letter-spacing: 2px; 
+            transform: translateY(clamp(8px, 2vw, 15px));
+            background: linear-gradient(135deg, #1e293b, #475569);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .message {
             color: var(--text-muted); 
-            font-size: clamp(0.9rem, 2vw, 1.05rem); 
+            font-size: clamp(0.9rem, 2.2vw, 1.05rem); 
             line-height: 1.6;
-            font-weight: 500; text-align: center; margin-bottom: 20px;
+            font-weight: 500; text-align: center; margin-bottom: 25px;
+            padding: 0 10px;
         }
 
-        .input-section { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; }
+        /* Form Input Lucu & Profesional */
+        .input-section { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
         
         .input-box {
-            width: 100%; padding: clamp(10px, 3vw, 14px) 20px; 
-            font-family: 'Poppins', sans-serif; font-size: clamp(0.85rem, 2vw, 1rem);
-            color: var(--text-dark); background: rgba(0, 0, 0, 0.03);
-            border: 2px solid #cbd5e1; border-radius: 15px;
+            width: 100%; padding: clamp(12px, 3vw, 16px) 20px; 
+            font-family: 'Poppins', sans-serif; font-size: clamp(0.85rem, 2vw, 0.95rem);
+            color: var(--text-dark); background: #f8fafc;
+            border: 2px solid #e2e8f0; border-radius: 16px;
             outline: none; transition: all 0.3s ease;
             font-weight: 500;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        .input-box::placeholder { color: #94a3b8; }
+        .input-box::placeholder { color: #94a3b8; font-weight: 400; }
         .input-box:focus {
-            border-color: var(--neon-cyan); background: #ffffff;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            border-color: var(--gold-primary); background: #ffffff;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 2px 4px rgba(0,0,0,0.01);
         }
-        textarea.input-box { resize: none; height: clamp(70px, 15vw, 90px); }
+        textarea.input-box { resize: none; height: clamp(80px, 16vw, 100px); }
 
-        .display-section { display: none; margin: 15px 0; }
+        .display-section { display: none; margin: 20px 0; animation: fadeInCard 0.6s ease; }
+        @keyframes fadeInCard { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
         .custom-hope-text {
-            font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--text-dark); font-weight: 700;
-            font-style: italic; line-height: 1.6; padding: 15px 20px;
-            background: rgba(0, 243, 255, 0.1);
-            border-left: 4px solid var(--neon-cyan); border-right: 4px solid var(--neon-cyan);
-            border-radius: 8px;
+            font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: #0f172a; font-weight: 700;
+            font-style: italic; line-height: 1.6; padding: 20px;
+            background: linear-gradient(135deg, rgba(255,226,89,0.15) 0%, rgba(255,167,81,0.15) 100%);
+            border-left: 5px solid var(--gold-primary); border-right: 5px solid var(--gold-primary);
+            border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
-        .ornament { display: flex; align-items: center; justify-content: center; margin: 20px 0; }
-        .ornament-line { height: 2px; width: clamp(60px, 15vw, 120px); background: linear-gradient(to right, transparent, var(--neon-cyan), transparent); }
-        .ornament-star { color: var(--neon-cyan); font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 0 15px; animation: pulseStar 1.5s infinite alternate; }
-        @keyframes pulseStar { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 1; text-shadow: 0 0 15px var(--neon-cyan); } }
+        .ornament { display: flex; align-items: center; justify-content: center; margin: 25px 0; }
+        .ornament-line { height: 2px; width: clamp(70px, 18vw, 130px); background: linear-gradient(to right, transparent, var(--gold-primary), transparent); }
+        .ornament-star { color: var(--gold-primary); font-size: clamp(1.2rem, 3vw, 1.6rem); margin: 0 15px; animation: pulseStar 1.5s infinite alternate; }
+        @keyframes pulseStar { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.3); opacity: 1; text-shadow: 0 0 12px var(--gold-primary); } }
 
         .sender { margin-top: 10px; color: #475569; font-size: clamp(0.85rem, 2vw, 0.95rem); font-weight: 500; }
         .sender .team-name {
-            display: block; margin-top: 5px; font-family: 'Outfit', sans-serif;
-            font-size: clamp(1.2rem, 3.5vw, 1.5rem); color: var(--gold-primary); font-weight: 900; letter-spacing: 1px;
+            display: block; margin-top: 6px; font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.3rem, 3.8vw, 1.6rem); font-weight: 900; letter-spacing: 0.5px;
+            background: var(--luxury-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
         }
 
+        /* Tombol Aksi */
         .btn-container { 
-            margin-top: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
+            margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
         }
         
         .btn-action {
-            padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 35px); 
-            font-family: 'Outfit', sans-serif; font-size: clamp(0.9rem, 2vw, 1.05rem);
+            padding: clamp(14px, 3.2vw, 18px) clamp(24px, 5vw, 40px); 
+            font-family: 'Outfit', sans-serif; font-size: clamp(0.95rem, 2.2vw, 1.1rem);
             font-weight: 900; color: white; border-radius: 50px; cursor: pointer;
-            transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px; border: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1); text-transform: uppercase; letter-spacing: 1.5px; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         
-        .btn-celebrate { background: linear-gradient(135deg, #00d2ff, #3a7bd5); box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4); width: 100%; max-width: 400px; }
-        .btn-celebrate:active { transform: scale(0.95); }
+        .btn-celebrate { 
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6); 
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); 
+            width: 100%; max-width: 420px; 
+        }
         .btn-celebrate:hover { 
-            transform: translateY(-3px) scale(1.02); 
-            background: linear-gradient(135deg, #ef4444, #991b1b); 
-            box-shadow: 0 10px 25px rgba(227, 36, 43, 0.5); 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6); 
         }
+        .btn-celebrate:active { transform: translateY(-1px); }
 
-        .btn-shoot { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4); display: none; }
-        .btn-shoot:hover { transform: translateY(-3px) scale(1.02); background: linear-gradient(135deg, #d97706, #b45309); }
+        .btn-shoot { 
+            background: linear-gradient(135deg, #f59e0b, #ea580c); 
+            box-shadow: 0 8px 22px rgba(234, 88, 12, 0.35); 
+            display: none; 
+        }
+        .btn-shoot:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(234, 88, 12, 0.5); }
         
-        .btn-share { background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); display: none; }
-        .btn-share:hover { transform: translateY(-3px) scale(1.02); background: linear-gradient(135deg, #059669, #064e3b); }
+        .btn-share { 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35); 
+            display: none; 
+        }
+        .btn-share:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5); }
 
-        /* Media Query Khusus Layar HP (Mobile) */
         @media (max-width: 600px) {
-            .btn-container { flex-direction: column; gap: 10px; }
-            .btn-action { width: 100%; } /* Tombol jadi memanjang penuh ke bawah agar mudah ditekan */
-            .glass-card { padding-top: 30px; padding-bottom: 30px; }
+            .btn-container { flex-direction: column; gap: 12px; }
+            .btn-action { width: 100%; }
+            .glass-card { padding: 35px 20px; border-radius: 28px; }
         }
     </style>
 </head>
 <body>
+
+    <div class="bg-decorations">
+        <span class="floating-emoji" style="top: 15%; left: 8%; animation-delay: 0s;">🎈</span>
+        <span class="floating-emoji" style="top: 20%; right: 10%; animation-delay: 2s;">✨</span>
+        <span class="floating-emoji" style="bottom: 25%; left: 12%; animation-delay: 4s;">🏗️</span>
+        <span class="floating-emoji" style="bottom: 15%; right: 8%; animation-delay: 1s;">🏢</span>
+    </div>
 
     <canvas id="festiveCanvas"></canvas>
 
@@ -229,8 +284,8 @@
         </p>
 
         <div id="inputSection" class="input-section">
-            <textarea id="userHope" class="input-box" placeholder="Ketik harapan & doa Anda untuk perusahaan di sini..."></textarea>
-            <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Elon - Tim Proyek)">
+            <textarea id="userHope" class="input-box" placeholder="Ketik harapan & doa tulus Anda untuk kemajuan perusahaan di sini..."></textarea>
+            <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Ahmad - Engineering)">
         </div>
 
         <div id="displaySection" class="display-section">
@@ -239,7 +294,7 @@
 
         <div class="ornament">
             <div class="ornament-line"></div>
-            <div class="ornament-star">✧</div>
+            <div class="ornament-star">✦</div>
             <div class="ornament-line"></div>
         </div>
 
@@ -249,12 +304,13 @@
         </div>
 
         <div class="btn-container" id="actionButtons">
-            <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Terapkan & Rayakan! 🚀</button>
-            <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Tembakkan Petasan!</button>
+            <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Ucapkan dan Rayakan! 🚀</button>
+            <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Tembak Petasan</button>
             <button id="btnShare" class="btn-action btn-share" onclick="shareToWhatsApp()">Bagikan Kartu 💬</button>
         </div>
     </div>
 
+    <!-- Master audio element tetap dipertahankan untuk preloading -->
     <audio id="fireworkSound" preload="auto">
         <source src="kembang-api.mp3" type="audio/mpeg">
     </audio>
@@ -262,18 +318,36 @@
     <script>
         const canvas = document.getElementById("festiveCanvas");
         const ctx = canvas.getContext("2d");
-        const baseAudio = document.getElementById("fireworkSound");
 
         canvas.width = window.innerWidth; 
         canvas.height = window.innerHeight;
         let fireworks = [], particles = [], isCelebrating = false;
         
-        const colors = ['#ff0040', '#00f3ff', '#ffea00', '#ff00aa', '#00ff40', '#ff5e00', '#d400ff', '#ffffff'];
+        const colors = ['#00f3ff', '#ff007f', '#ffea00', '#00ff40', '#ff5e00', '#d400ff', '#ffffff', '#ff9a00'];
 
-        function playExplosionSound(vol = 0.5) {
-            let soundClone = baseAudio.cloneNode();
-            soundClone.volume = vol; 
-            soundClone.play().catch(e => console.log("Audio diblokir oleh browser. Pastikan berinteraksi dengan layar terlebih dahulu."));
+        // --- SOLUSI AUDIO: Audio Pool untuk mengatasi pembatasan browser seluler ---
+        const audioPool = [];
+        const poolSize = 8;
+        let poolIndex = 0;
+
+        // Inisialisasi pool objek audio
+        for (let i = 0; i < poolSize; i++) {
+            let audioNode = new Audio('kembang-api.mp3');
+            audioNode.preload = 'auto';
+            audioPool.push(audioNode);
+        }
+
+        function playExplosionSound(vol = 0.4) {
+            if (!isCelebrating) return;
+            try {
+                let sound = audioPool[poolIndex];
+                sound.volume = vol;
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log("Audio tertunda menunggu interaksi aktif."));
+                poolIndex = (poolIndex + 1) % poolSize;
+            } catch (e) {
+                console.log("Gagal memutar suara kembang api:", e);
+            }
         }
 
         // --- KELAS ROKET KEMBANG API ---
@@ -281,8 +355,8 @@
             constructor(isHuge = false) {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + 20; 
-                this.targetY = Math.random() * (canvas.height * 0.4) + 50; 
-                this.speed = Math.random() * 8 + 14; 
+                this.targetY = Math.random() * (canvas.height * 0.45) + 60; 
+                this.speed = Math.random() * 6 + 12; 
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.exploded = false; 
                 this.isHuge = isHuge;
@@ -292,18 +366,18 @@
                 if (this.y <= this.targetY) {
                     this.exploded = true;
                     createParticles(this.x, this.y, this.color, this.isHuge);
-                    if(isCelebrating) playExplosionSound(this.isHuge ? 0.8 : 0.3);
+                    playExplosionSound(this.isHuge ? 0.6 : 0.25);
                 }
             }
             draw() {
                 ctx.save();
                 ctx.beginPath(); 
                 ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y + (this.speed * 3)); 
+                ctx.lineTo(this.x, this.y + (this.speed * 2.5)); 
                 ctx.strokeStyle = this.color;
-                ctx.lineWidth = 5; 
+                ctx.lineWidth = 4; 
                 ctx.lineCap = 'round';
-                ctx.shadowBlur = 20; 
+                ctx.shadowBlur = 15; 
                 ctx.shadowColor = this.color;
                 ctx.stroke(); 
                 ctx.restore();
@@ -317,14 +391,14 @@
                 this.y = y;
                 this.color = color;
                 const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 6 + 2; 
+                const speed = Math.random() * 5 + 2; 
                 this.velocity = {
                     x: Math.cos(angle) * speed,
                     y: Math.sin(angle) * speed
                 };
                 this.alpha = 1;
-                this.friction = 0.96; 
-                this.gravity = 0.08;  
+                this.friction = 0.95; 
+                this.gravity = 0.07;  
             }
             update() {
                 this.velocity.x *= this.friction;
@@ -332,15 +406,15 @@
                 this.velocity.y += this.gravity;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                this.alpha -= 0.015; 
+                this.alpha -= 0.014; 
             }
             draw() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 15;
+                ctx.shadowBlur = 10;
                 ctx.shadowColor = this.color;
                 ctx.fill();
                 ctx.restore();
@@ -348,10 +422,8 @@
         }
 
         function createParticles(x, y, color, isHuge) {
-            // OPTIMASI: Kurangi jumlah partikel di layar HP agar animasi tidak patah-patah/lag
             const isMobile = window.innerWidth <= 768;
-            const particleCount = isHuge ? (isMobile ? 80 : 150) : (isMobile ? 30 : 60);
-            
+            const particleCount = isHuge ? (isMobile ? 70 : 130) : (isMobile ? 25 : 55);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle(x, y, color));
             }
@@ -360,7 +432,7 @@
         // --- ANIMATION LOOP ---
         function animate() {
             requestAnimationFrame(animate);
-            ctx.fillStyle = 'rgba(2, 2, 2, 0.2)';
+            ctx.fillStyle = 'rgba(12, 21, 43, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             fireworks.forEach((firework, index) => {
@@ -378,20 +450,22 @@
                 }
             });
 
-            if (isCelebrating && Math.random() < 0.04) {
+            if (isCelebrating && Math.random() < 0.045) {
                 fireworks.push(new Firework());
             }
         }
 
-        // --- FUNGSI TOMBOL ---
+        // --- FUNGSI TOMBOL CELEBRATE ---
         function startCelebration() {
             isCelebrating = true;
             
-            baseAudio.volume = 0;
-            baseAudio.play().then(() => {
-                baseAudio.pause();
-                baseAudio.currentTime = 0;
-            }).catch(e => console.log("Audio siap diputar setelah interaksi."));
+            // AKTIVASI MANDATORI: Buka kunci semua audio pool saat ada interaksi sentuhan pengguna fisik asli
+            audioPool.forEach(audio => {
+                audio.play().then(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }).catch(e => console.log("Membuka kunci audio pool..."));
+            });
 
             document.getElementById('num51').classList.remove('active');
             document.getElementById('num51').classList.add('out');
@@ -410,56 +484,84 @@
             document.getElementById('displaySenderName').innerText = name;
             
             document.getElementById('btnCelebrate').style.display = 'none';
-            document.getElementById('btnShoot').style.display = 'inline-block';
-            document.getElementById('btnShare').style.display = 'inline-block';
+            document.getElementById('btnShoot').style.display = 'inline-flex';
+            document.getElementById('btnShare').style.display = 'inline-flex';
             
             launchMassiveBarrage();
         }
 
         function launchMassiveBarrage() {
-            // Kurangi intensitas tembakan awal di layar HP agar tidak overload memori
-            const limit = window.innerWidth <= 768 ? 5 : 8;
+            const limit = window.innerWidth <= 768 ? 4 : 7;
             for(let i = 0; i < limit; i++) {
                 setTimeout(() => {
                     fireworks.push(new Firework(true));
-                }, i * 250);
+                }, i * 220);
             }
         }
 
-        // --- FUNGSI SCREENSHOT & BAGIKAN KE WHATSAPP ---
+        // --- SOLUSI WHATSAPP: Membuat Kartu Ucapan Digital Otomatis yang Unik & Profesional ---
         function shareToWhatsApp() {
             const cardElement = document.getElementById('mainCard');
             const actionButtons = document.getElementById('actionButtons');
             const originalBoxShadow = cardElement.style.boxShadow;
 
+            // Ambil data teks yang diinput pengguna
+            const rawHope = document.getElementById('userHope').value;
+            const rawName = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
+            
+            const hopeText = rawHope ? rawHope : "Semoga PT Murinda Iron Steel terus maju, sukses, dan kokoh sebagai pemimpin konstruksi inovatif tanah air!";
+
+            // 1. Susun Pesan WhatsApp Teks Terformat Indah & Unik (Sebagai Kartu Ucapan Teks Profesional)
+            const whatsappText = 
+`*✨ ANNIVERSARY PT MURINDA IRON STEEL Ke-52 ✨*
+_"... Tradisi Panjang Konstruksi Inovatif ..."_
+
+Halo Rekan-rekan! Kebahagiaan dan doa tulus telah dikirimkan oleh *${rawName}* :
+
+💬 *Harapan & Doa Masa Depan:*
+_"${hopeText}"_
+
+Mari bersama-sama kita perkokoh ketangguhan, melahirkan mahakarya hebat, dan membawa PT Murinda terbang lebih tinggi lagi! 🚀🏗️🔥
+
+*Salam Hangat & Bangga,*
+🙏 *${rawName}*`;
+
+            // Sembunyikan tombol sebelum melakukan capture gambar
             actionButtons.style.display = 'none';
             cardElement.style.boxShadow = 'none';
 
+            // 2. Lakukan unduhan otomatis visual kartu ucapan beresolusi tinggi (html2canvas)
             html2canvas(cardElement, {
-                backgroundColor: "#050510",
-                scale: 2, 
+                backgroundColor: "#0c152b",
+                scale: 2.5, 
                 useCORS: true 
             }).then(canvas => {
                 actionButtons.style.display = 'flex';
                 cardElement.style.boxShadow = originalBoxShadow;
 
                 const imgData = canvas.toDataURL('image/png');
-
                 const link = document.createElement('a');
-                link.download = 'Anniversary_Murinda.png';
+                link.download = `Anniversary_Murinda_52_${rawName.replace(/[^a-zA-Z0-9]/g, "_")}.png`;
                 link.href = imgData;
                 link.click();
 
-                alert("Kartu Ucapan berhasil diunduh! Buka galeri/folder unduhan Anda dan bagikan gambar tersebut ke Status WhatsApp.");
+                // 3. Otomatis alihkan pengguna ke WhatsApp dengan membawa draf kartu ucapan teks unik
+                setTimeout(() => {
+                    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
+                    window.open(waUrl, '_blank');
+                }, 400);
+
             }).catch(err => {
                 actionButtons.style.display = 'flex';
                 cardElement.style.boxShadow = originalBoxShadow;
-                console.error("Gagal membuat gambar: ", err);
-                alert("Maaf, terjadi kesalahan saat membuat kartu.");
+                console.error("Gagal memproses kartu ucapan: ", err);
+                
+                // Fallback jika html2canvas terhambat: Tetap arahkan kirim teks ke WhatsApp
+                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
+                window.open(waUrl, '_blank');
             });
         }
 
-        // Responsif untuk Canvas
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
