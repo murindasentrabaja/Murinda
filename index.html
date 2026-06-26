@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🎉 Selamat Ulang Tahun PT Murinda Iron Steel 🎉</title>
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Outfit:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Menambahkan Font Pacifico untuk tulisan Tahun yang lebih luwes -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Titan+One&family=Outfit:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-cyan: #00f3ff; 
@@ -29,7 +29,6 @@
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* Latar belakang dekoratif awan/partikel halus */
         .bg-decorations {
             position: absolute; width: 100%; height: 100%;
             top: 0; left: 0; z-index: 0; pointer-events: none;
@@ -52,21 +51,24 @@
             z-index: 1; pointer-events: none;
         }
 
-        /* Desain Kartu Mewah, Elegan & Profesional */
         .glass-card {
             position: relative; z-index: 2;
             background: var(--bg-glass);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 3px solid rgba(255, 215, 0, 0.6);
             border-radius: clamp(24px, 5vw, 36px);
             padding: clamp(30px, 6vw, 50px) clamp(20px, 5vw, 60px);
             max-width: 750px; width: 92%; max-height: 92vh;
             overflow-y: auto; text-align: center;
-            box-shadow: 
-                0 0 50px rgba(0, 243, 255, 0.25), 
-                inset 0 0 30px rgba(245, 158, 11, 0.1),
-                0 30px 70px rgba(5, 7, 17, 0.8);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid var(--neon-pink);
+            animation: rgbCardGlow 8s linear infinite;
+        }
+
+        @keyframes rgbCardGlow {
+            0%   { border-color: #ff007f; box-shadow: 0 0 35px rgba(255,0,127,0.7), inset 0 0 20px rgba(255,0,127,0.4), 0 30px 70px rgba(5,7,17,0.8); }
+            25%  { border-color: #00f3ff; box-shadow: 0 0 35px rgba(0,243,255,0.7), inset 0 0 20px rgba(0,243,255,0.4), 0 30px 70px rgba(5,7,17,0.8); }
+            50%  { border-color: #00ff40; box-shadow: 0 0 35px rgba(0,255,64,0.7), inset 0 0 20px rgba(0,255,64,0.4), 0 30px 70px rgba(5,7,17,0.8); }
+            75%  { border-color: #ffea00; box-shadow: 0 0 35px rgba(255,234,0,0.7), inset 0 0 20px rgba(255,234,0,0.4), 0 30px 70px rgba(5,7,17,0.8); }
+            100% { border-color: #ff007f; box-shadow: 0 0 35px rgba(255,0,127,0.7), inset 0 0 20px rgba(255,0,127,0.4), 0 30px 70px rgba(5,7,17,0.8); }
         }
 
         .glass-card::-webkit-scrollbar { width: 4px; }
@@ -74,12 +76,12 @@
 
         .header-group {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            margin-bottom: 15px; width: 100%;
+            margin-bottom: 5px; width: 100%;
         }
 
         .logo-container { 
             display: flex; justify-content: center; align-items: center;
-            padding: 5px 20px; margin-bottom: 15px;
+            padding: 5px 20px;
             animation: pulseLogo 3s infinite ease-in-out;
         }
         @keyframes pulseLogo {
@@ -91,24 +93,14 @@
             max-width: clamp(170px, 35vw, 250px); width: 100%; height: auto; display: block;
         }
 
-        .subtitle {
-            color: var(--gold-dark); font-weight: 800;
-            font-size: clamp(0.75rem, 2.2vw, 0.9rem);
-            letter-spacing: 3px; text-transform: uppercase;
-            display: inline-block; background: rgba(245, 158, 11, 0.12);
-            padding: 6px 28px; border-radius: 50px; border: 1px solid rgba(245, 158, 11, 0.3);
-            box-shadow: inset 0 1px 4px rgba(245, 158, 11, 0.1);
-        }
-
         h1 {
             font-family: 'Outfit', sans-serif; font-weight: 900;
             font-size: clamp(2.2rem, 5.5vw, 3.2rem);
-            line-height: 1.1; margin-bottom: 5px; margin-top: 15px;
+            line-height: 1.1; margin-bottom: 5px; margin-top: 5px;
             background: linear-gradient(135deg, #0f172a 30%, #1e293b 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Transisi Umur Angka */
         .number-transition {
             position: relative; 
             height: clamp(90px, 16vw, 130px);
@@ -130,6 +122,7 @@
         
         .num.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         .num.out { animation: pullDown 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+        
         @keyframes pullDown {
             0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
             100% { transform: translate(-50%, 60%) scale(0.4); opacity: 0; }
@@ -137,6 +130,8 @@
         
         .num.standby { transform: translate(-50%, 150%) scale(0.4); opacity: 0; }
         .num.in { animation: superBounce 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        /* Animasi masuk awal */
         @keyframes superBounce {
             0% { opacity: 0; transform: translate(-50%, 100%) scale(0.4); }
             40% { opacity: 1; transform: translate(-50%, -75%) scale(1.15) rotate(-8deg); }
@@ -144,14 +139,48 @@
             100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
         }
 
+        /* Animasi terus-menerus ceria setelah angka masuk */
+        .num.cheerful {
+            opacity: 1;
+            animation: joyfulWobble 2s infinite ease-in-out;
+        }
+
+        @keyframes joyfulWobble {
+            0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) scale(1.06) rotate(4deg); }
+            75% { transform: translate(-50%, -50%) scale(1.06) rotate(-4deg); }
+        }
+
+        /* Teks Tahun yang baru, lebih luwes dan tidak kaku */
         .tahun-text { 
-            color: #1e293b; margin-left: 10px; 
-            font-family: 'Outfit', sans-serif; font-weight: 900; 
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            letter-spacing: 2px; 
-            transform: translateY(clamp(8px, 2vw, 15px));
-            background: linear-gradient(135deg, #1e293b, #475569);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            color: var(--gold-dark); margin-left: 15px; 
+            font-family: 'Pacifico', cursive; /* Menggunakan font sambung */
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            letter-spacing: 1px; 
+            transform: translateY(clamp(5px, 1.5vw, 15px)) rotate(-5deg);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1;
+        }
+
+        /* Desain Waktu Mundur */
+        .countdown-container {
+            margin-bottom: 20px;
+        }
+        .countdown-badge {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 700;
+            color: var(--neon-cyan);
+            background: rgba(15, 23, 42, 0.85);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            animation: pulseCountdown 2s infinite alternate;
+        }
+        @keyframes pulseCountdown {
+            0% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); transform: scale(1); }
+            100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.7); transform: scale(1.03); }
         }
 
         .message {
@@ -162,23 +191,31 @@
             padding: 0 10px;
         }
 
-        /* Form Input Lucu & Profesional */
         .input-section { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
         
         .input-box {
             width: 100%; padding: clamp(12px, 3vw, 16px) 20px; 
             font-family: 'Poppins', sans-serif; font-size: clamp(0.85rem, 2vw, 0.95rem);
-            color: var(--text-dark); background: #f8fafc;
-            border: 2px solid #e2e8f0; border-radius: 16px;
+            color: var(--text-dark); background: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--neon-cyan); border-radius: 16px;
             outline: none; transition: all 0.3s ease;
             font-weight: 500;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            animation: pulseInput 2.5s infinite alternate;
         }
+
+        @keyframes pulseInput {
+            0%   { box-shadow: 0 0 10px rgba(0, 243, 255, 0.3), inset 0 0 5px rgba(0, 243, 255, 0.1); }
+            100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.7), inset 0 0 10px rgba(0, 243, 255, 0.3); }
+        }
+
         .input-box::placeholder { color: #94a3b8; font-weight: 400; }
         .input-box:focus {
-            border-color: var(--gold-primary); background: #ffffff;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 2px 4px rgba(0,0,0,0.01);
+            border-color: var(--neon-pink); 
+            background: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.7), inset 0 0 12px rgba(255, 0, 127, 0.4) !important;
+            animation: none;
         }
+        
         textarea.input-box { resize: none; height: clamp(80px, 16vw, 100px); }
 
         .display-section { display: none; margin: 20px 0; animation: fadeInCard 0.6s ease; }
@@ -189,68 +226,74 @@
             font-style: italic; line-height: 1.6; padding: 20px;
             background: linear-gradient(135deg, rgba(255,226,89,0.15) 0%, rgba(255,167,81,0.15) 100%);
             border-left: 5px solid var(--gold-primary); border-right: 5px solid var(--gold-primary);
-            border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-radius: 16px;
         }
 
         .ornament { display: flex; align-items: center; justify-content: center; margin: 25px 0; }
         .ornament-line { height: 2px; width: clamp(70px, 18vw, 130px); background: linear-gradient(to right, transparent, var(--gold-primary), transparent); }
         .ornament-star { color: var(--gold-primary); font-size: clamp(1.2rem, 3vw, 1.6rem); margin: 0 15px; animation: pulseStar 1.5s infinite alternate; }
-        @keyframes pulseStar { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.3); opacity: 1; text-shadow: 0 0 12px var(--gold-primary); } }
+        @keyframes pulseStar { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.3); opacity: 1; } }
 
         .sender { margin-top: 10px; color: #475569; font-size: clamp(0.85rem, 2vw, 0.95rem); font-weight: 500; }
         .sender .team-name {
             display: block; margin-top: 6px; font-family: 'Outfit', sans-serif;
             font-size: clamp(1.3rem, 3.8vw, 1.6rem); font-weight: 900; letter-spacing: 0.5px;
             background: var(--luxury-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
         }
 
-        /* Tombol Aksi */
+        .screenshot-banner {
+            display: none;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #1e40af;
+            padding: 15px;
+            border-radius: 16px;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            margin: 20px 0 10px 0;
+            font-weight: 700;
+            border: 2px dashed #3b82f6;
+            line-height: 1.5;
+            animation: fadeInCard 0.5s ease;
+        }
+
         .btn-container { 
-            margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
+            margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; 
         }
         
         .btn-action {
-            padding: clamp(14px, 3.2vw, 18px) clamp(24px, 5vw, 40px); 
-            font-family: 'Outfit', sans-serif; font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 32px); 
+            font-family: 'Outfit', sans-serif; font-size: clamp(0.9rem, 2.1vw, 1rem);
             font-weight: 900; color: white; border-radius: 50px; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1); text-transform: uppercase; letter-spacing: 1.5px; border: none;
+            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; border: none;
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         
         .btn-celebrate { 
             background: linear-gradient(135deg, #1e3a8a, #3b82f6); 
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); 
-            width: 100%; max-width: 420px; 
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); 
+            width: 100%; max-width: 400px; 
         }
-        .btn-celebrate:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6); 
-        }
-        .btn-celebrate:active { transform: translateY(-1px); }
+        .btn-celebrate:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5); }
 
-        .btn-shoot { 
-            background: linear-gradient(135deg, #f59e0b, #ea580c); 
-            box-shadow: 0 8px 22px rgba(234, 88, 12, 0.35); 
-            display: none; 
-        }
-        .btn-shoot:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(234, 88, 12, 0.5); }
+        .btn-shoot { background: linear-gradient(135deg, #f59e0b, #ea580c); display: none; }
+        .btn-shoot:hover { transform: translateY(-2px); }
+
+        .btn-copy { background: linear-gradient(135deg, #6b7280, #374151); display: none; }
+        .btn-copy:hover { transform: translateY(-2px); }
         
-        .btn-share { 
-            background: linear-gradient(135deg, #10b981, #059669); 
-            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35); 
-            display: none; 
-        }
-        .btn-share:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5); }
+        .btn-share { background: linear-gradient(135deg, #10b981, #059669); display: none; }
+        .btn-share:hover { transform: translateY(-2px); }
 
         @media (max-width: 600px) {
-            .btn-container { flex-direction: column; gap: 12px; }
+            .btn-container { flex-direction: column; gap: 10px; }
             .btn-action { width: 100%; }
             .glass-card { padding: 35px 20px; border-radius: 28px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Audio untuk Musik Latar -->
+    <audio id="bgMusic" src="Musik Latar.mp3" loop preload="auto"></audio>
 
     <div class="bg-decorations">
         <span class="floating-emoji" style="top: 15%; left: 8%; animation-delay: 0s;">🎈</span>
@@ -266,7 +309,6 @@
             <div class="logo-container">
                 <img src="Murinda Logo.png" alt="Logo PT Murinda Iron Steel" onerror="this.style.display='none'">
             </div>
-            <div class="subtitle" id="topSubtitle">Tradisi Inovasi</div>
         </div>
 
         <h1>Happy Anniversary</h1>
@@ -276,7 +318,14 @@
                 <div id="num51" class="num active">51</div>
                 <div id="num52" class="num standby">52</div>
             </div>
-            <span class="tahun-text">TAHUN</span>
+            <span class="tahun-text">Tahun Penuh Karya!</span>
+        </div>
+
+        <!-- Wadah untuk Countdown Waktu Menit -->
+        <div class="countdown-container" id="countdownWrapper">
+            <div class="countdown-badge" id="countdownDisplay">
+                Mencari waktu... ⏳
+            </div>
         </div>
         
         <p class="message" id="generalMessage">
@@ -284,8 +333,8 @@
         </p>
 
         <div id="inputSection" class="input-section">
-            <textarea id="userHope" class="input-box" placeholder="Ketik harapan & doa tulus Anda untuk kemajuan perusahaan di sini..."></textarea>
-            <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Ahmad - Engineering)">
+            <textarea id="userHope" class="input-box" placeholder="Ketik harapan & doa tulus Anda untuk kemajuan perusahaan di sini..." required></textarea>
+            <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Jhonson - Engineering)" required>
         </div>
 
         <div id="displaySection" class="display-section">
@@ -303,17 +352,18 @@
             <span class="team-name" id="displaySenderName">Keluarga Besar PT Murinda</span>
         </div>
 
+        <div id="screenshotInstruction" class="screenshot-banner">
+            📸 <strong>Bagikan Kartu</strong><br>
+            Silakan ambil Tangkapan Layar / Screenshot HP Anda sekarang
+        </div>
+
         <div class="btn-container" id="actionButtons">
-            <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Terapkan & Rayakan! 🚀</button>
-            <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Tembak Petasan</button>
-            <button id="btnShare" class="btn-action btn-share" onclick="shareToWhatsApp()">Bagikan Kartu 💬</button>
+            <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Mari Rayakan! 🚀</button>
+            <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Petasan</button>
+            <button id="btnCopy" class="btn-action btn-copy" onclick="copyGreetingText()">📋 Salin Ucapan</button>
+            <button id="btnShare" class="btn-action btn-share" onclick="shareToWhatsApp()">Bagikan ke WA 💬</button>
         </div>
     </div>
-
-    <!-- Master audio element tetap dipertahankan untuk preloading -->
-    <audio id="fireworkSound" preload="auto">
-        <source src="kembang-api.mp3" type="audio/mpeg">
-    </audio>
 
     <script>
         const canvas = document.getElementById("festiveCanvas");
@@ -322,35 +372,25 @@
         canvas.width = window.innerWidth; 
         canvas.height = window.innerHeight;
         let fireworks = [], particles = [], isCelebrating = false;
-        
-        const colors = ['#00f3ff', '#ff007f', '#ffea00', '#00ff40', '#ff5e00', '#d400ff', '#ffffff', '#ff9a00'];
+        const colors = ['#00f3ff', '#ff007f', '#ffea00', '#00ff40', '#ff5e00', '#d400ff', '#ffffff'];
 
-        // --- SOLUSI AUDIO: Audio Pool untuk mengatasi pembatasan browser seluler ---
         const audioPool = [];
-        const poolSize = 8;
-        let poolIndex = 0;
-
-        // Inisialisasi pool objek audio
-        for (let i = 0; i < poolSize; i++) {
+        for (let i = 0; i < 6; i++) {
             let audioNode = new Audio('kembang-api.mp3');
             audioNode.preload = 'auto';
             audioPool.push(audioNode);
         }
 
-        function playExplosionSound(vol = 0.4) {
+        function playExplosionSound() {
             if (!isCelebrating) return;
             try {
-                let sound = audioPool[poolIndex];
-                sound.volume = vol;
+                let sound = audioPool[Math.floor(Math.random() * audioPool.length)];
+                sound.volume = 0.3;
                 sound.currentTime = 0;
-                sound.play().catch(e => console.log("Audio tertunda menunggu interaksi aktif."));
-                poolIndex = (poolIndex + 1) % poolSize;
-            } catch (e) {
-                console.log("Gagal memutar suara kembang api:", e);
-            }
+                sound.play().catch(() => {});
+            } catch (e) {}
         }
 
-        // --- KELAS ROKET KEMBANG API ---
         class Firework {
             constructor(isHuge = false) {
                 this.x = Math.random() * canvas.width;
@@ -366,205 +406,164 @@
                 if (this.y <= this.targetY) {
                     this.exploded = true;
                     createParticles(this.x, this.y, this.color, this.isHuge);
-                    playExplosionSound(this.isHuge ? 0.6 : 0.25);
+                    playExplosionSound();
                 }
             }
             draw() {
                 ctx.save();
                 ctx.beginPath(); 
                 ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y + (this.speed * 2.5)); 
+                ctx.lineTo(this.x, this.y + 20); 
                 ctx.strokeStyle = this.color;
-                ctx.lineWidth = 4; 
-                ctx.lineCap = 'round';
-                ctx.shadowBlur = 15; 
-                ctx.shadowColor = this.color;
+                ctx.lineWidth = 3; 
                 ctx.stroke(); 
                 ctx.restore();
             }
         }
 
-        // --- KELAS PARTIKEL LEDAKAN ---
         class Particle {
             constructor(x, y, color) {
-                this.x = x; 
-                this.y = y;
-                this.color = color;
+                this.x = x; this.y = y; this.color = color;
                 const angle = Math.random() * Math.PI * 2;
                 const speed = Math.random() * 5 + 2; 
-                this.velocity = {
-                    x: Math.cos(angle) * speed,
-                    y: Math.sin(angle) * speed
-                };
+                this.velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
                 this.alpha = 1;
-                this.friction = 0.95; 
-                this.gravity = 0.07;  
+                this.friction = 0.95; this.gravity = 0.08;  
             }
             update() {
-                this.velocity.x *= this.friction;
-                this.velocity.y *= this.friction;
-                this.velocity.y += this.gravity;
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                this.alpha -= 0.014; 
+                this.velocity.x *= this.friction; this.velocity.y *= this.friction; this.velocity.y += this.gravity;
+                this.x += this.velocity.x; this.y += this.velocity.y;
+                this.alpha -= 0.015; 
             }
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                ctx.restore();
+                ctx.save(); ctx.globalAlpha = this.alpha; ctx.beginPath();
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); ctx.restore();
             }
         }
 
         function createParticles(x, y, color, isHuge) {
-            const isMobile = window.innerWidth <= 768;
-            const particleCount = isHuge ? (isMobile ? 70 : 130) : (isMobile ? 25 : 55);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle(x, y, color));
-            }
+            const count = isHuge ? 80 : 30;
+            for (let i = 0; i < count; i++) particles.push(new Particle(x, y, color));
         }
 
-        // --- ANIMATION LOOP ---
         function animate() {
             requestAnimationFrame(animate);
-            ctx.fillStyle = 'rgba(12, 21, 43, 0.2)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            fireworks.forEach((firework, index) => {
-                firework.update();
-                firework.draw();
-                if (firework.exploded) fireworks.splice(index, 1);
-            });
-
-            particles.forEach((particle, index) => {
-                if (particle.alpha <= 0) {
-                    particles.splice(index, 1);
-                } else {
-                    particle.update();
-                    particle.draw();
-                }
-            });
-
-            if (isCelebrating && Math.random() < 0.045) {
-                fireworks.push(new Firework());
-            }
+            ctx.fillStyle = 'rgba(12, 21, 43, 0.2)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((f, i) => { f.update(); f.draw(); if (f.exploded) fireworks.splice(i, 1); });
+            particles.forEach((p, i) => { if (p.alpha <= 0) { particles.splice(i, 1); } else { p.update(); p.draw(); } });
+            if (isCelebrating && Math.random() < 0.04) fireworks.push(new Firework());
         }
 
-        // --- FUNGSI TOMBOL CELEBRATE ---
+        // --- Logika Hitung Mundur (Countdown Menit) ---
+        function updateCountdown() {
+            const targetDate = new Date('2026-06-28T00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const countdownEl = document.getElementById('countdownDisplay');
+
+            if (diff > 0) {
+                // Konversi sisa waktu ke dalam total menit
+                const minutesLeft = Math.floor(diff / (1000 * 60));
+                countdownEl.innerHTML = `⏳ Sisa Waktu Anniversary: <strong style="color: var(--gold-light);">${minutesLeft.toLocaleString('id-ID')} Menit Lagi</strong> ⏳`;
+            } else {
+                countdownEl.innerHTML = `✨ Hari Ini Adalah Puncak Hari Anniversary! ✨`;
+                countdownEl.style.boxShadow = "0 0 20px rgba(255, 0, 127, 0.8)";
+                countdownEl.style.borderColor = "var(--neon-pink)";
+            }
+        }
+        
+        // Memperbarui hitungan menit setiap 60 detik (1 menit)
+        setInterval(updateCountdown, 60000);
+        updateCountdown(); 
+
+        // --- Logika Mulai Perayaan & Validasi ---
         function startCelebration() {
+            const hope = document.getElementById('userHope').value.trim();
+            const name = document.getElementById('userName').value.trim();
+            
+            // Aturan Validasi: Wajib Isi Doa dan Nama
+            if (!hope || !name) {
+                alert("Mohon maaf, silakan isi Harapan/Doa dan Nama Anda terlebih dahulu sebelum ikut merayakan! 🙏");
+                return;
+            }
+
+            // Memulai Musik Latar dengan volume kecil
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.volume = 0.20; // Set volume lebih kecil dari petasan
+            bgMusic.play().catch(e => console.log("Auto-play musik terblokir oleh browser."));
+
             isCelebrating = true;
             
-            // AKTIVASI MANDATORI: Buka kunci semua audio pool saat ada interaksi sentuhan pengguna fisik asli
-            audioPool.forEach(audio => {
-                audio.play().then(() => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                }).catch(e => console.log("Membuka kunci audio pool..."));
-            });
-
-            document.getElementById('num51').classList.remove('active');
-            document.getElementById('num51').classList.add('out');
-            document.getElementById('num52').classList.remove('standby');
-            document.getElementById('num52').classList.add('in');
+            document.getElementById('num51').className = 'num out';
+            document.getElementById('num52').className = 'num in';
             
-            const hope = document.getElementById('userHope').value;
-            const name = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
+            // Setelah animasi masuk selesai, berikan efek gerak ceria terus menerus pada angka 52
+            setTimeout(() => {
+                document.getElementById('num52').className = 'num cheerful';
+            }, 1200);
             
-            if(hope) {
-                document.getElementById('displayHopeText').innerText = `"${hope}"`;
-                document.getElementById('inputSection').style.display = 'none';
-                document.getElementById('displaySection').style.display = 'block';
-                document.getElementById('generalMessage').style.display = 'none';
-            }
+            // Menampilkan input doa pengguna
+            document.getElementById('displayHopeText').innerText = `"${hope}"`;
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('displaySection').style.display = 'block';
+            document.getElementById('generalMessage').style.display = 'none';
+            document.getElementById('countdownWrapper').style.display = 'none';
+            
             document.getElementById('displaySenderName').innerText = name;
             
+            // Konfigurasi tombol aksi lanjutan
             document.getElementById('btnCelebrate').style.display = 'none';
             document.getElementById('btnShoot').style.display = 'inline-flex';
+            document.getElementById('btnCopy').style.display = 'inline-flex';
             document.getElementById('btnShare').style.display = 'inline-flex';
+            document.getElementById('screenshotInstruction').style.display = 'block';
             
             launchMassiveBarrage();
         }
 
         function launchMassiveBarrage() {
-            const limit = window.innerWidth <= 768 ? 4 : 7;
-            for(let i = 0; i < limit; i++) {
-                setTimeout(() => {
-                    fireworks.push(new Firework(true));
-                }, i * 220);
+            for(let i = 0; i < 5; i++) {
+                setTimeout(() => { fireworks.push(new Firework(true)); }, i * 200);
             }
         }
 
-        // --- SOLUSI WHATSAPP: Membuat Kartu Ucapan Digital Otomatis yang Unik & Profesional ---
-        function shareToWhatsApp() {
-            const cardElement = document.getElementById('mainCard');
-            const actionButtons = document.getElementById('actionButtons');
-            const originalBoxShadow = cardElement.style.boxShadow;
-
-            // Ambil data teks yang diinput pengguna
+        function buildText() {
             const rawHope = document.getElementById('userHope').value;
             const rawName = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
             
-            const hopeText = rawHope ? rawHope : "Semoga PT Murinda Iron Steel terus maju, sukses, dan kokoh sebagai pemimpin konstruksi inovatif tanah air!";
+            return `*✨ ANNIVERSARY PT MURINDA IRON STEEL Ke-52 ✨*\n` +
+                   `_"... Tradisi Panjang Konstruksi Inovatif ..."_\n\n` +
+                   `Kebahagiaan dan doa tulus telah dikirimkan oleh *${rawName}* :\n\n` +
+                   `💬 *Harapan & Doa Masa Depan:*\n` +
+                   `_"${rawHope}"_\n\n` +
+                   `Mari bersama-sama kita perkokoh ketangguhan, melahirkan mahakarya hebat, dan membawa PT Murinda terbang lebih tinggi lagi! 🚀🏗️🔥\n\n` +
+                   `*Salam Hangat & Bangga,*\n` +
+                   `🙏 *${rawName}*`;
+        }
 
-            // 1. Susun Pesan WhatsApp Teks Terformat Indah & Unik (Sebagai Kartu Ucapan Teks Profesional)
-            const whatsappText = 
-`*✨ KARTU UCAPAN DIGITAL ANNIVERSARY PT MURINDA IRON STEEL Ke-52 ✨*
-_"... Tradisi Panjang Konstruksi Inovatif ..."_
-
-Halo Rekan-rekan! Kebahagiaan dan doa tulus telah dikirimkan oleh *${rawName}* :
-
-💬 *Harapan & Doa Masa Depan:*
-_"${hopeText}"_
-
-Mari bersama-sama kita perkokoh ketangguhan, melahirkan mahakarya hebat, dan membawa PT Murinda terbang lebih tinggi lagi! 🚀🏗️🔥
-
-*Salam Hangat & Bangga,*
-🙏 *${rawName}*`;
-
-            // Sembunyikan tombol sebelum melakukan capture gambar
-            actionButtons.style.display = 'none';
-            cardElement.style.boxShadow = 'none';
-
-            // 2. Lakukan unduhan otomatis visual kartu ucapan beresolusi tinggi (html2canvas)
-            html2canvas(cardElement, {
-                backgroundColor: "#0c152b",
-                scale: 2.5, 
-                useCORS: true 
-            }).then(canvas => {
-                actionButtons.style.display = 'flex';
-                cardElement.style.boxShadow = originalBoxShadow;
-
-                const imgData = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.download = `Anniversary_Murinda_52_${rawName.replace(/[^a-zA-Z0-9]/g, "_")}.png`;
-                link.href = imgData;
-                link.click();
-
-                // 3. Otomatis alihkan pengguna ke WhatsApp dengan membawa draf kartu ucapan teks unik
-                setTimeout(() => {
-                    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
-                    window.open(waUrl, '_blank');
-                }, 400);
-
+        function copyGreetingText() {
+            const textToCopy = buildText();
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("📋 Sukses! Teks ucapan berhasil disalin. Silakan paste langsung di WhatsApp atau media sosial lainnya.");
             }).catch(err => {
-                actionButtons.style.display = 'flex';
-                cardElement.style.boxShadow = originalBoxShadow;
-                console.error("Gagal memproses kartu ucapan: ", err);
-                
-                // Fallback jika html2canvas terhambat: Tetap arahkan kirim teks ke WhatsApp
-                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
-                window.open(waUrl, '_blank');
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("📋 Sukses! Teks ucapan berhasil disalin.");
             });
         }
 
+        function shareToWhatsApp() {
+            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(buildText())}`;
+            window.open(waUrl, '_blank');
+        }
+
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         });
 
         animate();
