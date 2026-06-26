@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎉 Selamat Ulang Tahun PT Murinda Iron Steel 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Outfit:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --neon-cyan: #00f3ff; 
+            --neon-pink: #ff007f;
+            --gold-primary: #d97706;
+            --text-dark: #0f172a;
+            --text-muted: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 100%; height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #020202, #0a0a0a, #050510);
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        canvas {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        /* Padding responsif: Akan besar di PC dan otomatis mengecil di HP */
+        .glass-card {
+            position: relative; z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 243, 255, 0.8);
+            border-radius: clamp(20px, 4vw, 32px);
+            padding: clamp(25px, 5vw, 45px) clamp(20px, 5vw, 55px);
+            max-width: 850px; width: 92%; max-height: 90vh;
+            overflow-y: auto; text-align: center;
+            box-shadow: 
+                0 0 40px rgba(0, 243, 255, 0.5), 
+                inset 0 0 20px rgba(16, 185, 129, 0.15),
+                0 20px 50px rgba(217, 119, 6, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .glass-card::-webkit-scrollbar { width: 0px; }
+
+        .header-group {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin-bottom: 10px; width: 100%;
+        }
+
+        .logo-container { 
+            display: flex; justify-content: center; align-items: center;
+            padding: 5px 20px; margin-bottom: 15px;
+        }
+        
+        .logo-container img { 
+            max-width: clamp(160px, 30vw, 240px); width: 100%; height: auto; display: block;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+        }
+
+        .subtitle {
+            color: #b45309; font-weight: 800;
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+            letter-spacing: clamp(2px, 0.5vw, 4px); text-transform: uppercase;
+            display: inline-block; background: rgba(217, 119, 6, 0.1);
+            padding: 6px 30px; border-radius: 50px; border-bottom: 3px solid var(--gold-primary);
+        }
+
+        /* Ukuran font fluid (mengalir) mengikuti lebar layar */
+        h1 {
+            font-family: 'Outfit', sans-serif; font-weight: 900;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            line-height: 1.2; color: var(--text-dark); margin-bottom: 5px; margin-top: 15px;
+            text-shadow: 0 2px 10px rgba(0, 243, 255, 0.3);
+        }
+
+        .number-transition {
+            position: relative; 
+            height: clamp(80px, 15vw, 140px);
+            display: flex; justify-content: center; align-items: center;
+            margin: 10px 0 20px 0; font-family: 'Titan One', cursive; 
+            font-size: clamp(4.5rem, 12vw, 7.5rem); 
+        }
+        
+        .num-wrapper { position: relative; width: clamp(100px, 20vw, 160px); height: 100%; }
+        
+        .num {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(180deg, #FDE047 0%, #F59E0B 50%, #B45309 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 2px #fff; 
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+        }
+        
+        .num.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .num.out { animation: pullDown 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+        @keyframes pullDown {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, 50%) scale(0.5) rotate(15deg); opacity: 0; }
+        }
+        
+        .num.standby { transform: translate(-50%, 150%) scale(0.5); opacity: 0; }
+        .num.in { animation: superBounce 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards; }
+        @keyframes superBounce {
+            0% { opacity: 0; transform: translate(-50%, 100%) scale(0.5); }
+            40% { opacity: 1; transform: translate(-50%, -80%) scale(1.2) rotate(-10deg); filter: brightness(1.3); }
+            60% { transform: translate(-50%, -30%) scale(0.9) rotate(8deg); }
+            80% { transform: translate(-50%, -60%) scale(1.05) rotate(-5deg); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: brightness(1); }
+        }
+
+        .tahun-text { 
+            color: var(--text-dark); margin-left: clamp(5px, 2vw, 15px); 
+            font-family: 'Outfit', sans-serif; font-weight: 900; 
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            letter-spacing: clamp(1px, 0.5vw, 3px); 
+            transform: translateY(clamp(5px, 2vw, 15px));
+        }
+
+        .message {
+            color: var(--text-muted); 
+            font-size: clamp(0.9rem, 2vw, 1.05rem); 
+            line-height: 1.6;
+            font-weight: 500; text-align: center; margin-bottom: 20px;
+        }
+
+        .input-section { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; }
+        
+        .input-box {
+            width: 100%; padding: clamp(10px, 3vw, 14px) 20px; 
+            font-family: 'Poppins', sans-serif; font-size: clamp(0.85rem, 2vw, 1rem);
+            color: var(--text-dark); background: rgba(0, 0, 0, 0.03);
+            border: 2px solid #cbd5e1; border-radius: 15px;
+            outline: none; transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .input-box::placeholder { color: #94a3b8; }
+        .input-box:focus {
+            border-color: var(--neon-cyan); background: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+        textarea.input-box { resize: none; height: clamp(70px, 15vw, 90px); }
+
+        .display-section { display: none; margin: 15px 0; }
+        .custom-hope-text {
+            font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--text-dark); font-weight: 700;
+            font-style: italic; line-height: 1.6; padding: 15px 20px;
+            background: rgba(0, 243, 255, 0.1);
+            border-left: 4px solid var(--neon-cyan); border-right: 4px solid var(--neon-cyan);
+            border-radius: 8px;
+        }
+
+        .ornament { display: flex; align-items: center; justify-content: center; margin: 20px 0; }
+        .ornament-line { height: 2px; width: clamp(60px, 15vw, 120px); background: linear-gradient(to right, transparent, var(--neon-cyan), transparent); }
+        .ornament-star { color: var(--neon-cyan); font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 0 15px; animation: pulseStar 1.5s infinite alternate; }
+        @keyframes pulseStar { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 1; text-shadow: 0 0 15px var(--neon-cyan); } }
+
+        .sender { margin-top: 10px; color: #475569; font-size: clamp(0.85rem, 2vw, 0.95rem); font-weight: 500; }
+        .sender .team-name {
+            display: block; margin-top: 5px; font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem); color: var(--gold-primary); font-weight: 900; letter-spacing: 1px;
+        }
+
+        .btn-container { 
+            margin-top: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; 
+        }
+        
+        .btn-action {
+            padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 35px); 
+            font-family: 'Outfit', sans-serif; font-size: clamp(0.9rem, 2vw, 1.05rem);
+            font-weight: 900; color: white; border-radius: 50px; cursor: pointer;
+            transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px; border: none;
+        }
+        
+        .btn-celebrate { background: linear-gradient(135deg, #00d2ff, #3a7bd5); box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4); width: 100%; max-width: 400px; }
+        .btn-celebrate:active { transform: scale(0.95); }
+        .btn-celebrate:hover { 
+            transform: translateY(-3px) scale(1.02); 
+            background: linear-gradient(135deg, #ef4444, #991b1b); 
+            box-shadow: 0 10px 25px rgba(227, 36, 43, 0.5); 
+        }
+
+        .btn-shoot { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4); display: none; }
+        .btn-shoot:hover { transform: translateY(-3px) scale(1.02); background: linear-gradient(135deg, #d97706, #b45309); }
+        
+        .btn-share { background: linear-gradient(135deg, #10b981, #047857); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); display: none; }
+        .btn-share:hover { transform: translateY(-3px) scale(1.02); background: linear-gradient(135deg, #059669, #064e3b); }
+
+        /* Media Query Khusus Layar HP (Mobile) */
+        @media (max-width: 600px) {
+            .btn-container { flex-direction: column; gap: 10px; }
+            .btn-action { width: 100%; } /* Tombol jadi memanjang penuh ke bawah agar mudah ditekan */
+            .glass-card { padding-top: 30px; padding-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="festiveCanvas"></canvas>
+
+    <div class="glass-card" id="mainCard">
+        <div class="header-group">
+            <div class="logo-container">
+                <img src="Murinda Logo.png" alt="Logo PT Murinda Iron Steel" onerror="this.style.display='none'">
+            </div>
+            <div class="subtitle" id="topSubtitle">Tradisi Inovasi</div>
+        </div>
+
+        <h1>Happy Anniversary</h1>
+        
+        <div class="number-transition">
+            <div class="num-wrapper">
+                <div id="num51" class="num active">51</div>
+                <div id="num52" class="num standby">52</div>
+            </div>
+            <span class="tahun-text">TAHUN</span>
+        </div>
+        
+        <p class="message" id="generalMessage">
+            Sebagai salah satu kontraktor umum dan struktur baja terbesar di Indonesia, perjalanan panjang ini telah membuktikan ketangguhan kita dalam mendirikan berbagai mahakarya proyek. Berlandaskan semangat nilai pengiriman yang kompetitif dan kualitas jangka panjang, mari terus memegang teguh motto <strong>"... tradisi panjang konstruksi inovatif ..."</strong> demi memberikan layanan luar biasa yang berkelanjutan bagi seluruh pelanggan.
+        </p>
+
+        <div id="inputSection" class="input-section">
+            <textarea id="userHope" class="input-box" placeholder="Ketik harapan & doa Anda untuk perusahaan di sini..."></textarea>
+            <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Budi - Tim Proyek)">
+        </div>
+
+        <div id="displaySection" class="display-section">
+            <p class="custom-hope-text" id="displayHopeText">"..."</p>
+        </div>
+
+        <div class="ornament">
+            <div class="ornament-line"></div>
+            <div class="ornament-star">✧</div>
+            <div class="ornament-line"></div>
+        </div>
+
+        <div class="sender">
+            Salam hangat, ceria, dan bangga dari,<br>
+            <span class="team-name" id="displaySenderName">Keluarga Besar PT Murinda</span>
+        </div>
+
+        <div class="btn-container" id="actionButtons">
+            <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Terapkan & Rayakan! 🚀</button>
+            <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Tembakkan Petasan!</button>
+            <button id="btnShare" class="btn-action btn-share" onclick="shareToWhatsApp()">Bagikan Kartu 💬</button>
+        </div>
+    </div>
+
+    <audio id="fireworkSound" preload="auto">
+        <source src="kembang-api.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const canvas = document.getElementById("festiveCanvas");
+        const ctx = canvas.getContext("2d");
+        const baseAudio = document.getElementById("fireworkSound");
+
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight;
+        let fireworks = [], particles = [], isCelebrating = false;
+        
+        const colors = ['#ff0040', '#00f3ff', '#ffea00', '#ff00aa', '#00ff40', '#ff5e00', '#d400ff', '#ffffff'];
+
+        function playExplosionSound(vol = 0.5) {
+            let soundClone = baseAudio.cloneNode();
+            soundClone.volume = vol; 
+            soundClone.play().catch(e => console.log("Audio diblokir oleh browser. Pastikan berinteraksi dengan layar terlebih dahulu."));
+        }
+
+        // --- KELAS ROKET KEMBANG API ---
+        class Firework {
+            constructor(isHuge = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 20; 
+                this.targetY = Math.random() * (canvas.height * 0.4) + 50; 
+                this.speed = Math.random() * 8 + 14; 
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.exploded = false; 
+                this.isHuge = isHuge;
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y <= this.targetY) {
+                    this.exploded = true;
+                    createParticles(this.x, this.y, this.color, this.isHuge);
+                    if(isCelebrating) playExplosionSound(this.isHuge ? 0.8 : 0.3);
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.beginPath(); 
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + (this.speed * 3)); 
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 5; 
+                ctx.lineCap = 'round';
+                ctx.shadowBlur = 20; 
+                ctx.shadowColor = this.color;
+                ctx.stroke(); 
+                ctx.restore();
+            }
+        }
+
+        // --- KELAS PARTIKEL LEDAKAN ---
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x; 
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 2; 
+                this.velocity = {
+                    x: Math.cos(angle) * speed,
+                    y: Math.sin(angle) * speed
+                };
+                this.alpha = 1;
+                this.friction = 0.96; 
+                this.gravity = 0.08;  
+            }
+            update() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.velocity.y += this.gravity;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.015; 
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createParticles(x, y, color, isHuge) {
+            // OPTIMASI: Kurangi jumlah partikel di layar HP agar animasi tidak patah-patah/lag
+            const isMobile = window.innerWidth <= 768;
+            const particleCount = isHuge ? (isMobile ? 80 : 150) : (isMobile ? 30 : 60);
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        // --- ANIMATION LOOP ---
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.fillStyle = 'rgba(2, 2, 2, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            fireworks.forEach((firework, index) => {
+                firework.update();
+                firework.draw();
+                if (firework.exploded) fireworks.splice(index, 1);
+            });
+
+            particles.forEach((particle, index) => {
+                if (particle.alpha <= 0) {
+                    particles.splice(index, 1);
+                } else {
+                    particle.update();
+                    particle.draw();
+                }
+            });
+
+            if (isCelebrating && Math.random() < 0.04) {
+                fireworks.push(new Firework());
+            }
+        }
+
+        // --- FUNGSI TOMBOL ---
+        function startCelebration() {
+            isCelebrating = true;
+            
+            baseAudio.volume = 0;
+            baseAudio.play().then(() => {
+                baseAudio.pause();
+                baseAudio.currentTime = 0;
+            }).catch(e => console.log("Audio siap diputar setelah interaksi."));
+
+            document.getElementById('num51').classList.remove('active');
+            document.getElementById('num51').classList.add('out');
+            document.getElementById('num52').classList.remove('standby');
+            document.getElementById('num52').classList.add('in');
+            
+            const hope = document.getElementById('userHope').value;
+            const name = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
+            
+            if(hope) {
+                document.getElementById('displayHopeText').innerText = `"${hope}"`;
+                document.getElementById('inputSection').style.display = 'none';
+                document.getElementById('displaySection').style.display = 'block';
+                document.getElementById('generalMessage').style.display = 'none';
+            }
+            document.getElementById('displaySenderName').innerText = name;
+            
+            document.getElementById('btnCelebrate').style.display = 'none';
+            document.getElementById('btnShoot').style.display = 'inline-block';
+            document.getElementById('btnShare').style.display = 'inline-block';
+            
+            launchMassiveBarrage();
+        }
+
+        function launchMassiveBarrage() {
+            // Kurangi intensitas tembakan awal di layar HP agar tidak overload memori
+            const limit = window.innerWidth <= 768 ? 5 : 8;
+            for(let i = 0; i < limit; i++) {
+                setTimeout(() => {
+                    fireworks.push(new Firework(true));
+                }, i * 250);
+            }
+        }
+
+        // --- FUNGSI SCREENSHOT & BAGIKAN KE WHATSAPP ---
+        function shareToWhatsApp() {
+            const cardElement = document.getElementById('mainCard');
+            const actionButtons = document.getElementById('actionButtons');
+            const originalBoxShadow = cardElement.style.boxShadow;
+
+            actionButtons.style.display = 'none';
+            cardElement.style.boxShadow = 'none';
+
+            html2canvas(cardElement, {
+                backgroundColor: "#050510",
+                scale: 2, 
+                useCORS: true 
+            }).then(canvas => {
+                actionButtons.style.display = 'flex';
+                cardElement.style.boxShadow = originalBoxShadow;
+
+                const imgData = canvas.toDataURL('image/png');
+
+                const link = document.createElement('a');
+                link.download = 'Anniversary_Murinda.png';
+                link.href = imgData;
+                link.click();
+
+                alert("Kartu Ucapan berhasil diunduh! Buka galeri/folder unduhan Anda dan bagikan gambar tersebut ke Status WhatsApp.");
+            }).catch(err => {
+                actionButtons.style.display = 'flex';
+                cardElement.style.boxShadow = originalBoxShadow;
+                console.error("Gagal membuat gambar: ", err);
+                alert("Maaf, terjadi kesalahan saat membuat kartu.");
+            });
+        }
+
+        // Responsif untuk Canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        animate();
+    </script>
+</body>
+</html>
