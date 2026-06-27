@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🎉 Selamat Ulang Tahun PT Murinda Iron Steel 🎉</title>
-    <!-- Menambahkan Font Pacifico untuk tulisan Tahun yang lebih luwes -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Titan+One&family=Outfit:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -131,7 +130,6 @@
         .num.standby { transform: translate(-50%, 150%) scale(0.4); opacity: 0; }
         .num.in { animation: superBounce 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         
-        /* Animasi masuk awal */
         @keyframes superBounce {
             0% { opacity: 0; transform: translate(-50%, 100%) scale(0.4); }
             40% { opacity: 1; transform: translate(-50%, -75%) scale(1.15) rotate(-8deg); }
@@ -139,7 +137,6 @@
             100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
         }
 
-        /* Animasi terus-menerus ceria setelah angka masuk */
         .num.cheerful {
             opacity: 1;
             animation: joyfulWobble 2s infinite ease-in-out;
@@ -151,11 +148,10 @@
             75% { transform: translate(-50%, -50%) scale(1.06) rotate(-4deg); }
         }
 
-        /* Teks Tahun yang baru, lebih luwes dan tidak kaku */
         .tahun-text { 
             color: var(--gold-dark); margin-left: 15px; 
-            font-family: 'Pacifico', cursive; /* Menggunakan font sambung */
-            font-size: clamp(1.2rem, 3vw, 1.8rem); /* Diperkecil sedikit agar kalimat panjang pas */
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             letter-spacing: 1px; 
             transform: translateY(clamp(5px, 1.5vw, 15px)) rotate(-5deg);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
@@ -164,7 +160,6 @@
             display: inline-block;
         }
 
-        /* Desain Waktu Mundur */
         .countdown-container {
             margin-bottom: 20px;
         }
@@ -220,16 +215,52 @@
         
         textarea.input-box { resize: none; height: clamp(80px, 16vw, 100px); }
 
-        .display-section { display: none; margin: 20px 0; animation: fadeInCard 0.6s ease; }
-        @keyframes fadeInCard { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .slideshow-container {
+            display: none; 
+            height: clamp(220px, 35vh, 280px);
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+            animation: fadeInCard 0.6s ease;
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
 
-        .custom-hope-text {
-            font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: #0f172a; font-weight: 700;
-            font-style: italic; line-height: 1.6; padding: 20px;
+        .slideshow-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .slideshow-track:hover, .slideshow-track:active {
+            animation-play-state: paused !important;
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(280px); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .slideshow-item {
             background: linear-gradient(135deg, rgba(255,226,89,0.15) 0%, rgba(255,167,81,0.15) 100%);
             border-left: 5px solid var(--gold-primary); border-right: 5px solid var(--gold-primary);
             border-radius: 16px;
+            padding: 20px;
+            text-align: center;
         }
+
+        .slideshow-item .hope-text {
+            font-size: clamp(1rem, 2.5vw, 1.15rem); color: #0f172a; font-weight: 700;
+            font-style: italic; line-height: 1.6; margin-bottom: 8px;
+        }
+        
+        .slideshow-item .sender-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.2rem); 
+            color: var(--gold-dark); font-weight: 900;
+        }
+
+        @keyframes fadeInCard { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .ornament { display: flex; align-items: center; justify-content: center; margin: 25px 0; }
         .ornament-line { height: 2px; width: clamp(70px, 18vw, 130px); background: linear-gradient(to right, transparent, var(--gold-primary), transparent); }
@@ -294,7 +325,6 @@
 </head>
 <body>
 
-    <!-- Audio untuk Musik Latar -->
     <audio id="bgMusic" src="Musik Latar.mp3" loop preload="auto"></audio>
 
     <div class="bg-decorations">
@@ -323,7 +353,6 @@
             <span class="tahun-text" id="tahunText">Tahun Penuh Karya!</span>
         </div>
 
-        <!-- Wadah untuk Countdown Waktu Menit -->
         <div class="countdown-container" id="countdownWrapper">
             <div class="countdown-badge" id="countdownDisplay">
                 Mencari waktu... ⏳
@@ -341,8 +370,9 @@
             <input type="text" id="userName" class="input-box" placeholder="Ketik Nama / Divisi Anda (Cth: Jhonson - Engineering)" required>
         </div>
 
-        <div id="displaySection" class="display-section">
-            <p class="custom-hope-text" id="displayHopeText">"..."</p>
+        <div id="slideshowSection" class="slideshow-container">
+            <div id="slideshowTrack" class="slideshow-track">
+                </div>
         </div>
 
         <div class="ornament">
@@ -365,11 +395,26 @@
             <button id="btnCelebrate" class="btn-action btn-celebrate" onclick="startCelebration()">Mari Rayakan! 🚀</button>
             <button id="btnShoot" class="btn-action btn-shoot" onclick="launchMassiveBarrage()">🎇 Petasan</button>
             <button id="btnCopy" class="btn-action btn-copy" onclick="copyGreetingText()">📋 Salin Ucapan</button>
-            <button id="btnShare" class="btn-action btn-share" onclick="shareToWhatsApp()">Bagikan ke WA 💬</button>
+            <button id="btnShare" class="btn-action btn-share" onclick="bagikanKeWhatsApp()">Bagikan ke WA 💬</button>
         </div>
     </div>
 
     <script>
+        // --- Konfigurasi Google Apps Script URL ---
+        // Link hasil deploy terbaru dari permintaan
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabPCvRCl2ANu2AgNk9Y4Cst32mezmhmiqjeWsmnMFF4TCsdEFicdFj2mS6prBdXenMw/exec";
+        let daftarUcapan = [];
+
+        // Mengambil data ucapan sebelumnya saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch(GOOGLE_SCRIPT_URL)
+                .then(response => response.json())
+                .then(data => {
+                    daftarUcapan = data;
+                })
+                .catch(err => console.log('Gagal memuat daftar ucapan sebelumnya:', err));
+        });
+
         const canvas = document.getElementById("festiveCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -467,7 +512,6 @@
             const countdownEl = document.getElementById('countdownDisplay');
 
             if (diff > 0) {
-                // Konversi sisa waktu ke dalam total menit
                 const minutesLeft = Math.floor(diff / (1000 * 60));
                 countdownEl.innerHTML = `⏳ Sisa Waktu Anniversary: <strong style="color: var(--gold-light);">${minutesLeft.toLocaleString('id-ID')} Menit Lagi</strong> ⏳`;
             } else {
@@ -477,49 +521,105 @@
             }
         }
         
-        // Memperbarui hitungan menit setiap 60 detik (1 menit)
         setInterval(updateCountdown, 60000);
         updateCountdown(); 
 
-        // --- Logika Mulai Perayaan & Validasi ---
+        // --- Logika Membangun Tampilan Auto Scroll Slideshow ---
+        function buatTampilanSlideshow(namaBaru, harapanBaru) {
+            const track = document.getElementById('slideshowTrack');
+            track.innerHTML = ''; 
+
+            // 1. Masukkan ucapan pengguna saat ini (Paling Atas)
+            const itemBaru = document.createElement('div');
+            itemBaru.className = 'slideshow-item';
+            itemBaru.innerHTML = `
+                <div class="hope-text">"${harapanBaru}"</div>
+                <div class="sender-text">- ${namaBaru} -</div>
+            `;
+            track.appendChild(itemBaru);
+
+            // 2. Masukkan ucapan dari Spreadsheet Google (Diambil via GET)
+            if (daftarUcapan.length > 0) {
+                [...daftarUcapan].reverse().forEach(item => {
+                    // Karena GAS mengirimkan variabel 'name' dan 'hope', kita panggil ini.
+                    const n = item.name;
+                    const h = item.hope;
+                    
+                    if (h && n) {
+                        const div = document.createElement('div');
+                        div.className = 'slideshow-item';
+                        div.innerHTML = `
+                            <div class="hope-text">"${h}"</div>
+                            <div class="sender-text">- ${n} -</div>
+                        `;
+                        track.appendChild(div);
+                    }
+                });
+            }
+
+            // 3. Atur kecepatan animasi scroll
+            setTimeout(() => {
+                const tinggiTrack = track.scrollHeight;
+                const durasi = Math.max(15, tinggiTrack / 30); 
+                track.style.animation = `scrollUp ${durasi}s linear infinite`;
+            }, 200);
+        }
+
+        // --- Logika Mulai Perayaan & Pengiriman Data (POST JSON) ---
         function startCelebration() {
             const hope = document.getElementById('userHope').value.trim();
             const name = document.getElementById('userName').value.trim();
             
-            // Aturan Validasi: Wajib Isi Doa dan Nama
             if (!hope || !name) {
                 alert("Mohon maaf, silakan isi Harapan/Doa dan Nama Anda terlebih dahulu sebelum ikut merayakan! 🙏");
                 return;
             }
 
-            // Memulai Musik Latar dengan volume kecil
+            // Mengirim Data menggunakan metode JSON POST.
+            // Sesuai dengan skrip GAS Anda yang memanggil: JSON.parse(e.postData.contents)
+            const payload = {
+                name: name,
+                hope: hope
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, { 
+                method: 'POST', 
+                mode: 'no-cors', // Penting agar tidak terblokir CORS Policy
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8' // Di-set plain text agar pre-flight options di skip browser
+                },
+                body: JSON.stringify(payload)
+            }).then(() => console.log('Ucapan terkirim ke Spreadsheet'))
+              .catch(err => console.log('Proses kirim error:', err));
+
+            // Memulai Musik Latar 
             const bgMusic = document.getElementById('bgMusic');
-            bgMusic.volume = 0.25; // Set volume lebih kecil dari petasan
-            bgMusic.play().catch(e => console.log("Auto-play musik terblokir oleh browser."));
+            bgMusic.volume = 0.25; 
+            bgMusic.play().catch(e => console.log("Auto-play musik terblokir."));
 
             isCelebrating = true;
             
+            // Animasi angka
             document.getElementById('num51').className = 'num out';
             document.getElementById('num52').className = 'num in';
-
-            // Mengubah tulisan "Tahun Penuh Karya!" menjadi "One Team, One Spirit..." saat tombol merayakan diklik
             document.getElementById('tahunText').innerHTML = "One Team, One Spirit<br>Building a Stronger 2026";
             
-            // Setelah animasi masuk selesai, berikan efek gerak ceria terus menerus pada angka 52
             setTimeout(() => {
                 document.getElementById('num52').className = 'num cheerful';
             }, 1200);
             
-            // Menampilkan input doa pengguna
-            document.getElementById('displayHopeText').innerText = `"${hope}"`;
+            // Ubah Tampilan UI
             document.getElementById('inputSection').style.display = 'none';
-            document.getElementById('displaySection').style.display = 'block';
             document.getElementById('generalMessage').style.display = 'none';
             document.getElementById('countdownWrapper').style.display = 'none';
             
+            document.getElementById('slideshowSection').style.display = 'block';
             document.getElementById('displaySenderName').innerText = name;
             
-            // Konfigurasi tombol aksi lanjutan
+            // Membangun daftar slideshow
+            buatTampilanSlideshow(name, hope);
+            
+            // Menampilkan tombol
             document.getElementById('btnCelebrate').style.display = 'none';
             document.getElementById('btnShoot').style.display = 'inline-flex';
             document.getElementById('btnCopy').style.display = 'inline-flex';
@@ -540,8 +640,7 @@
             const rawName = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
             
             return `*✨ ANNIVERSARY PT MURINDA IRON STEEL Ke-52 ✨*\n` +
-                   `_"... One Team, One Spirit
-Building a Stronger 2026 ..."_\n\n` +
+                   `_"... One Team, One Spirit\nBuilding a Stronger 2026 ..."_\n\n` +
                    `Kebahagiaan dan doa tulus telah dikirimkan oleh *${rawName}* :\n\n` +
                    `💬 *Harapan & Doa Masa Depan:*\n` +
                    `_"${rawHope}"_\n\n` +
@@ -566,7 +665,7 @@ Building a Stronger 2026 ..."_\n\n` +
             });
         }
 
-        function shareToWhatsApp() {
+        function bagikanKeWhatsApp() {
             const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(buildText())}`;
             window.open(waUrl, '_blank');
         }
