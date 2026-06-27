@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎉 Selamat Ulang Tahun Ke 52 PT Murinda Iron Steel 🎉</title>
+    <title>🎉 Selamat Ulang Tahun PT Murinda Iron Steel 🎉</title>
     <!-- Menambahkan Font Pacifico untuk tulisan Tahun yang lebih luwes -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Titan+One&family=Outfit:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -155,11 +155,13 @@
         .tahun-text { 
             color: var(--gold-dark); margin-left: 15px; 
             font-family: 'Pacifico', cursive; /* Menggunakan font sambung */
-            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            font-size: clamp(1.2rem, 3vw, 1.8rem); /* Diperkecil sedikit agar kalimat panjang pas */
             letter-spacing: 1px; 
             transform: translateY(clamp(5px, 1.5vw, 15px)) rotate(-5deg);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            line-height: 1;
+            line-height: 1.3;
+            max-width: 65%;
+            display: inline-block;
         }
 
         /* Desain Waktu Mundur */
@@ -318,7 +320,7 @@
                 <div id="num51" class="num active">51</div>
                 <div id="num52" class="num standby">52</div>
             </div>
-            <span class="tahun-text">Tahun Penuh Karya!</span>
+            <span class="tahun-text" id="tahunText">Tahun Penuh Karya!</span>
         </div>
 
         <!-- Wadah untuk Countdown Waktu Menit -->
@@ -329,7 +331,9 @@
         </div>
         
         <p class="message" id="generalMessage">
-            Sebagai salah satu kontraktor umum dan struktur baja terbesar di Indonesia, perjalanan panjang ini telah membuktikan ketangguhan kita dalam mendirikan berbagai mahakarya proyek. Berlandaskan semangat nilai pengiriman yang kompetitif dan kualitas jangka panjang, mari terus memegang teguh motto <strong>"... tradisi panjang konstruksi inovatif ..."</strong> demi memberikan layanan luar biasa yang berkelanjutan bagi seluruh pelanggan.
+            Celebrating 52 years of journey.<br>
+            A commitment built on integrity, quality, and lasting trust.<br><br>
+            We extend our sincere appreciation to our clients, partners, and team who have been part of this journey.
         </p>
 
         <div id="inputSection" class="input-section">
@@ -354,7 +358,7 @@
 
         <div id="screenshotInstruction" class="screenshot-banner">
             📸 <strong>Bagikan Kartu</strong><br>
-            Silakan Rekam Layar / Screenshot dan bagikan
+            Silakan ambil Tangkapan Layar / Screenshot HP Anda sekarang
         </div>
 
         <div class="btn-container" id="actionButtons">
@@ -497,6 +501,9 @@
             
             document.getElementById('num51').className = 'num out';
             document.getElementById('num52').className = 'num in';
+
+            // Mengubah tulisan "Tahun Penuh Karya!" menjadi "One Team, One Spirit..." saat tombol merayakan diklik
+            document.getElementById('tahunText').innerHTML = "One Team, One Spirit<br>Building a Stronger 2026";
             
             // Setelah animasi masuk selesai, berikan efek gerak ceria terus menerus pada angka 52
             setTimeout(() => {
@@ -532,12 +539,14 @@
             const rawHope = document.getElementById('userHope').value;
             const rawName = document.getElementById('userName').value || "Keluarga Besar PT Murinda";
             
-            return `*✨ ANNIVERSARY PT MURINDA IRON STEEL Ke-52 Klik Link https://murindasentrabaja.github.io/Murinda/*\n` +
-                   `_"... Tradisi Panjang Konstruksi Inovatif ..."_\n\n` +
+            return `*✨ ANNIVERSARY PT MURINDA IRON STEEL Ke-52 ✨*\n` +
+                   `_"... One Team, One Spirit
+Building a Stronger 2026 ..."_\n\n` +
                    `Kebahagiaan dan doa tulus telah dikirimkan oleh *${rawName}* :\n\n` +
                    `💬 *Harapan & Doa Masa Depan:*\n` +
                    `_"${rawHope}"_\n\n` +
                    `Mari bersama-sama kita perkokoh ketangguhan, melahirkan mahakarya hebat, dan membawa PT Murinda terbang lebih tinggi lagi! 🚀🏗️🔥\n\n` +
+                   `🔗 *Kunjungi Link:* https://murindasentrabaja.github.io/Murinda/\n\n` +
                    `*Salam Hangat & Bangga,*\n` +
                    `🙏 *${rawName}*`;
         }
